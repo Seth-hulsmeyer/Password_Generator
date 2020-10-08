@@ -1,8 +1,59 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
-var alphabet = ["a", "b", "c"];
+var alphabet = [
+  "a",
+  "b",
+  "c",
+  "d",
+  "e",
+  "f",
+  "g",
+  "h",
+  "i",
+  "j",
+  "k",
+  "l",
+  "m",
+  "n",
+  "o",
+  "p",
+  "q",
+  "r",
+  "s",
+  "t",
+  "u",
+  "v",
+  "x",
+  "y",
+  "z",
+];
 var number = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-var special = ["!", "@", "#"];
+var special = [
+  "!",
+  "@",
+  "#",
+  "$",
+  "%",
+  "^",
+  "&",
+  "*",
+  "(",
+  ")",
+  "?",
+  "+",
+  "'",
+  '"',
+  ",",
+  "/",
+  ";",
+  ":",
+  "<",
+  ">",
+  "~",
+  "_",
+  "`",
+  "|",
+];
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
@@ -36,7 +87,7 @@ function generateSpecChar() {
 function generatePassword() {
   //VARIABLES --------------------------------------------
   // password length (prompt), variable
-  var passwordLength = parseInt(
+  var passowordLength = parseInt(
     prompt("How long do you want your password? (8-128 characters)")
   );
   // lowercase characters (confirm), variable
@@ -72,10 +123,13 @@ function generatePassword() {
   if (upCase) {
     functionArray.push(generateUpCase);
   }
-  //for loop for(var i = 1, i < passwordLength, i++){}
-  var randomFunction =
+  //for loop to generate password
+  for(var i = 1, i < passwordLength, i++) {
+     var randomFunction =
     functionArray[Math.floor(Math.random() * functionArray.length) - 1];
   password.push(randomFunction());
+  }}
+ 
 
   //after loop
   return password.join("");
