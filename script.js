@@ -55,29 +55,29 @@ var special = [
   "|",
 ];
 
-//character functions
+//character functions -----------------------------------------------------
 function generateLowCase() {
-  var randomChar = alphabet[Math.floor(Math.random() * alphabet.length)];
-  console.log(randomChar);
-  return randomChar;
+  var randomLow = alphabet[Math.floor(Math.random() * alphabet.length)];
+  console.log(randomLow);
+  return randomLow;
 }
 
 function generateUpCase() {
-  var randomChar = alphabet[Math.floor(Math.random() * alphabet.length)];
-  console.log(randomChar);
-  return randomChar.toUpperCase();
+  var randomUp = alphabet[Math.floor(Math.random() * alphabet.length)];
+  console.log(randomUp);
+  return randomUp.toUpperCase();
 }
 
 function generateNumChar() {
-  var randomChar = number[Math.floor(Math.random() * number.length)];
-  console.log(randomChar)
-  return randomChar;
+  var randomNum = number[Math.floor(Math.random() * number.length)];
+  console.log(randomNum)
+  return randomNum;
 }
 
 function generateSpecChar() {
-  var randomChar = special[Math.floor(Math.random() * special.length)];
-  console.log(randomChar);
-  return randomChar;
+  var randomSpec = special[Math.floor(Math.random() * special.length)];
+  console.log(randomSpec);
+  return randomSpec;
 }
 
 //define generatePassword function
@@ -127,36 +127,39 @@ function generatePassword() {
   // password generating, character by character inside of a loop
   // checking for variable confirms, stored in an array by a function
   if (lowCase) {
-    // functionArray.push(generateLowCase());
-    functionArray.concat(alphabet);
+    functionArray.push(generateLowCase());
+    //  functionArray.concat(generateLowCase());
   }
 
   if (upCase) {
-    // functionArray.push(generateUpCase());
-    functionArray.concat(alphabet.toUpperCase);
+    functionArray.push(generateUpCase());
+    // functionArray.concat(generateUpCase());
   }
 
   if (numChar) {
-    // functionArray.push(generateNumChar());
-    functionArray.concat(number);
+    functionArray.push(generateNumChar());
+    // functionArray.concat(generateNumChar());
   }
 
   if (specChar) {
-    // functionArray.push(generateSpecChar());
-    functionArray.concat(special);
+    functionArray.push(generateSpecChar());
+    // functionArray.concat(generateSpecChar());
   }
+
   //for loop to generate password
   for (var i = 0; i < passwordLength; i++) {
     var randomFunction =
       functionArray[Math.floor(Math.random() * functionArray.length)];
-    console.log(functionArray[i]);
-    password.push(randomFunction);
+      console.log(functionArray);
+      password.push(randomFunction);
   }
-// for (var i=0; i <  ; i++) {
-// password[i] = generateLowCase();
+console.log(password);
+  //for loop to ensure that every true confirm is in the generated password
+  // for (var i=0; i <  ; i++) {
+  // password[i] = generateLowCase();
 
-// }
-  //after loop
+  // }
+  //after loop joins the array of password characters into the strong password
   return password.join("");
 }
 
