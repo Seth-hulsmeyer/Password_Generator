@@ -1,5 +1,6 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
+
 var alphabet = [
   "a",
   "b",
@@ -42,7 +43,6 @@ var special = [
   "?",
   "+",
   "'",
-  '"',
   ",",
   "/",
   ";",
@@ -54,32 +54,29 @@ var special = [
   "`",
   "|",
 ];
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-}
 
 //character functions
 function generateLowCase() {
-  var randomChar = alphabet[Math.floor(Math.random() * alphabet.length) - 1];
+  var randomChar = alphabet[Math.floor(Math.random() * alphabet.length)];
+  console.log(randomChar);
   return randomChar;
 }
 
 function generateUpCase() {
-  var randomChar = alphabet[Math.floor(Math.random() * alphabet.length) - 1];
+  var randomChar = alphabet[Math.floor(Math.random() * alphabet.length)];
+  console.log(randomChar);
   return randomChar.toUpperCase();
 }
 
 function generateNumChar() {
-  var randomChar = number[Math.floor(Math.random() * number.length) - 1];
+  var randomChar = number[Math.floor(Math.random() * number.length)];
+  console.log(randomChar)
   return randomChar;
 }
 
 function generateSpecChar() {
-  var randomChar = special[Math.floor(Math.random() * special.length) - 1];
+  var randomChar = special[Math.floor(Math.random() * special.length)];
+  console.log(randomChar);
   return randomChar;
 }
 
@@ -87,9 +84,16 @@ function generateSpecChar() {
 function generatePassword() {
   //VARIABLES --------------------------------------------
   // password length (prompt), variable
-  var passowordLength = parseInt(
-    prompt("How long do you want your password? (8-128 characters)")
+  var passwordLength = prompt(
+    "How long do you want your password? (8-128 characters)"
   );
+  //error check for password length
+  if (passwordLength < 8 || passwordLength > 128) {
+    alert("Please choose a number between 8 and 128.");
+    return writePassword();
+  }
+
+
   // lowercase characters (confirm), variable
   var lowCase = confirm(
     "Would you like your password to contain lowercase characters?"
@@ -104,35 +108,64 @@ function generatePassword() {
   var specChar = confirm(
     "Would you like your password to contain special characters?"
   );
+  //error check for no criteria chosen
+  if (
+    lowCase == false &&
+    upCase == false &&
+    numChar == false &&
+    specChar == false
+  ) {
+    alert("Please choose a critera for your password.");
+    return writePassword();
+  }
   //function array for password characters
   var functionArray = [];
   var password = [];
-  // MAIN LOGIC --------------------------------------
-  //error handling
-  //if pw length is <7 and >129, alert "please enter 8-128", return, call write pw function
-  return writePassword();
 
-  //if none of four check variables is true, alert "please choose a password criteria", return, call write pw function
+  // MAIN LOGIC --------------------------------------
 
   // password generating, character by character inside of a loop
   // checking for variable confirms, stored in an array by a function
   if (lowCase) {
-    functionArray.push(generateLowCase);
+    // functionArray.push(generateLowCase());
+    functionArray.concat(alphabet);
   }
 
   if (upCase) {
-    functionArray.push(generateUpCase);
+    // functionArray.push(generateUpCase());
+    functionArray.concat(alphabet.toUpperCase);
+  }
+
+  if (numChar) {
+    // functionArray.push(generateNumChar());
+    functionArray.concat(number);
+  }
+
+  if (specChar) {
+    // functionArray.push(generateSpecChar());
+    functionArray.concat(special);
   }
   //for loop to generate password
-  for(var i = 1, i < passwordLength, i++) {
-     var randomFunction =
-    functionArray[Math.floor(Math.random() * functionArray.length) - 1];
-  password.push(randomFunction());
-  }}
- 
+  for (var i = 0; i < passwordLength; i++) {
+    var randomFunction =
+      functionArray[Math.floor(Math.random() * functionArray.length)];
+    console.log(functionArray[i]);
+    password.push(randomFunction);
+  }
+// for (var i=0; i <  ; i++) {
+// password[i] = generateLowCase();
 
+// }
   //after loop
   return password.join("");
+}
+
+// Write password to the #password input
+function writePassword() {
+  var password = generatePassword();
+  var passwordText = document.querySelector("#password");
+
+  passwordText.value = password;
 }
 
 // Add event listener to generate button
