@@ -36,11 +36,18 @@ function generatePassword() {
   var passwordLength = prompt(
     "How long do you want your password? (8-128 characters)"
   );
-  //error check for password length
+  
+  //stop program if user cancels
+  if (passwordLength == null) {
+    alert("Okay then.");
+    return; }
+
+    //error check for password length
   if (passwordLength < 8 || passwordLength > 128) {
     alert("Please choose a number between 8 and 128.");
     return writePassword();
   }
+
 
 
   // lowercase characters (confirm), variable
